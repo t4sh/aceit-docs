@@ -1,0 +1,118 @@
+---
+layout: layouts/base.njk
+---
+  {% import "macros/nav.njk" as navigation %}
+  {% set docsNav = collections.docs | eleventyNavigation %}
+  {% set flatDocs = docsNav | flattenNav %}
+  {% set previous = flatDocs | neighbor(page.url, -1) %}
+  {% set next = flatDocs | neighbor(page.url, 1) %}
+  {% set tocHeadings = content | docHeadings %}
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <button class="sidebar-scrim" type="button" tabindex="-1" aria-hidden="true" data-menu-close aria-label="Close navigation"></button>
+  <div class="docs-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+      <div class="sidebar-inner">
+        <div class="sidebar-top">
+          <a class="brand" href="/" aria-label="{{ site.name }} home">
+            {% icon "book", "brand-mark" %}
+            <span>{{ site.brand }}<span class="brand-divider">/</span><span class="brand-subtitle">Docs</span></span>
+          </a>
+          <button class="icon-button sidebar-close" type="button" data-menu-close aria-label="Close navigation">
+            {% icon "close" %}
+          </button>
+        </div>
+        <div class="sidebar-navigation">
+          <div class="sidebar-heading">Documentation</div>
+          <nav aria-label="Documentation">{{ navigation.render(docsNav, page.url) }}</nav>
+        </div>
+        <div class="sidebar-footer">
+          <a class="sidebar-secondary" href="{{ site.externalUrl }}" target="_blank" rel="noopener noreferrer">{{ site.externalLabel }} {% icon "external-link" %}</a>
+          <div class="sidebar-controls">
+            <details class="appearance-picker" data-appearance-picker>
+              <summary class="sidebar-control" aria-label="Appearance settings" title="Appearance settings">
+                {% icon "appearance" %}
+                <span>Appearance</span>
+              </summary>
+              <div class="appearance-panel">
+                <strong>Appearance</strong>
+                <label for="docs-preset">Preset</label>
+                <div class="select-field"><select id="docs-preset" data-preset-select>
+                  {% for preset in themePresets.presets %}<option value="{{ preset.id }}"{% if preset.id == site.themeVariant %} selected{% endif %}>{{ preset.label }}</option>{% endfor %}
+                </select>{% icon "chevron-down" %}</div>
+                <label for="docs-palette">Palette</label>
+                <div class="select-field"><select id="docs-palette" data-palette-select>
+                  {% for palette in themePresets.palettes %}<option value="{{ palette.id }}"{% if palette.id == site.themePalette %} selected{% endif %}>{{ palette.label }}</option>{% endfor %}
+                </select>{% icon "chevron-down" %}</div>
+                <p data-palette-help>Choose a docs preset to change palettes.</p>
+              </div>
+            </details>
+            <button class="sidebar-control theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
+              {% icon "system", "system-icon" %}
+              {% icon "sun", "sun-icon" %}
+              {% icon "moon", "moon-icon" %}
+              <span data-theme-label>System</span>
+            </button>
+          </div>
+          <div class="sidebar-meta">{% icon "code" %} Built with Eleventy</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main">
+      <div class="article-wrap">
+        <div class="article-toolbar">
+          <button class="icon-button mobile-menu" type="button" data-menu-toggle aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+            {% icon "menu" %}
+          </button>
+          {% if eleventyNavigation.parent %}
+            <div class="breadcrumb"><a href="/">Docs</a>{% icon "chevron-right" %}<span>{{ title }}</span></div>
+          {% else %}
+            <div class="breadcrumb"><span>Docs</span>{% icon "chevron-right" %}<span>{{ title }}</span></div>
+          {% endif %}
+          <button class="search-trigger" type="button" data-search-open aria-label="Search documentation" aria-keyshortcuts="Meta+K Control+K">
+            {% icon "search" %}
+            <span>Search</span><kbd aria-hidden="true">{% icon "command" %} K</kbd>
+          </button>
+        </div>
+        <div class="page-heading"><h1>{{ title }}</h1>{% if description %}<p class="lead">{{ description }}</p>{% endif %}</div>
+        <article class="prose" id="article">{{ content | safe }}</article>
+        <nav class="page-nav" aria-label="Previous and next pages">
+          {% if previous %}<a href="{{ previous.url }}"><small>Previous</small><span>{% icon "arrow-left" %} {{ previous.title }}</span></a>{% else %}<span></span>{% endif %}
+          {% if next %}<a class="next" href="{{ next.url }}"><small>Next</small><span>{{ next.title }} {% icon "arrow-right" %}</span></a>{% endif %}
+        </nav>
+      </div>
+    </main>
+
+    <aside class="toc" aria-label="On this page">
+      <div class="toc-inner">
+        <h2 class="toc-heading" id="toc-title">{% icon "contents" %}On this page</h2>
+        <nav id="toc-list" aria-labelledby="toc-title">
+          {% if tocHeadings.length %}
+            <ol>
+              {% for heading in tocHeadings %}
+                <li>
+                  <a href="#{{ heading.id }}"{% if heading.level == 3 %} class="toc-sub"{% endif %}{% if loop.first %} aria-current="location"{% endif %}>{{ heading.title }}</a>
+                  {% if heading.children.length %}
+                    <ol>
+                      {% for child in heading.children %}
+                        <li><a class="toc-sub" href="#{{ child.id }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ol>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p class="toc-empty">No sections on this page</p>
+          {% endif %}
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <dialog class="search-dialog" aria-label="Search documentation" data-search-dialog>
+    <div class="search-input-wrap">{% icon "search" %}<input type="search" data-search-input placeholder="Search documentation..." aria-label="Search documentation" autocomplete="off"><button type="button" data-search-close aria-label="Close search">Esc</button></div>
+    <div class="search-results" data-search-results role="status" aria-live="polite"><p>Start typing to find a page.</p></div>
+    <div class="search-dialog-footer">Searches page titles and content</div>
+  </dialog>

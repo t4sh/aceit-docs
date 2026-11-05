@@ -1,0 +1,30 @@
+---
+title: Release notes
+description: A readable history of what changed, why it matters, and what to do next.
+permalink: /release-notes/
+eleventyNavigation:
+  key: Release notes
+  order: 5
+---
+{% import "macros/timeline.njk" as timeline %}
+<p>This is an example release history. Replace the sample versions, dates, and changes with your project's own before publishing.</p>
+<ol class="release-timeline" role="list">
+  {% call timeline.entry("version-1-2", "v1.2.0", "2026-06-18", "18 June 2026", "A clearer reading experience") %}
+    <p>Find the right example faster, with less interruption while reading.</p>
+    <h3 id="version-1-2-added">Added</h3>
+    <ul><li>Package-manager tabs that remember your choice across pages.</li><li>Named code examples with a one-click copy action.</li></ul>
+    <h3 id="version-1-2-improved">Improved</h3>
+    <p>Light and dark code surfaces now follow your appearance settings. No migration is needed.</p>
+    <p><a href="/guides/components/#code-blocks">Explore the code examples</a></p>
+  {% endcall %}
+  {% call timeline.entry("version-1-1", "v1.1.0", "2026-05-21", "21 May 2026", "More room for your identity") %}
+    <p>Choose a type pairing, palette, and corner style that suit your documentation.</p>
+    <h3 id="version-1-1-added">Added</h3>
+    <ul><li>Appearance presets for technical guides and editorial reading.</li><li>Self-hosted fonts, with no third-party font requests.</li></ul>
+    <p><a href="/guides/theming/">Customize the theme</a></p>
+  {% endcall %}
+  {% call timeline.entry("version-1-0", "v1.0.0", "2026-04-16", "16 April 2026", "The first chapter") %}
+    <p>A small foundation for documentation: Markdown pages, navigation, search, and accessible light and dark themes.</p>
+    <p><a href="/getting-started/installation/">Start a new project</a></p>
+  {% endcall %}
+</ol>

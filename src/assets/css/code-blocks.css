@@ -1,0 +1,70 @@
+/* Code colors follow color-scheme; appearance presets own the surrounding geometry. */
+:root {
+  --code-background: light-dark(color-mix(in srgb, var(--content-surface) 35%, white), color-mix(in srgb, var(--content-surface) 35%, #0d1117));
+  --code-foreground: light-dark(#24292e, #e6edf3);
+  --code-header-background: color-mix(in srgb, var(--code-background) 80%, var(--background));
+  --code-highlight-background: light-dark(#fff8c5, #34301c);
+  --code-insert-background: light-dark(#dafbe1, #163427);
+  --code-delete-background: light-dark(#ffebe9, #412326);
+}
+.code-block { position: relative; min-width: 0; overflow: hidden; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--code-background); }
+.code-block [hidden] { display: none !important; }
+.code-header { display: flex; align-items: center; gap: .5rem; min-height: calc(var(--control-height) + 8px); padding: 0 .75rem; background: var(--code-header-background); border-bottom: 1px solid var(--border-subtle); }
+.code-title, .code-language { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted-foreground); font-size: var(--fs-caption); line-height: var(--lh-caption); }
+.code-title { font-family: var(--font-mono); }
+.code-copy { display: inline-grid; place-items: center; flex: none; margin-left: auto; width: var(--control-compact); height: var(--control-compact); padding: 0; color: var(--muted-foreground); border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent; }
+.code-copy svg { grid-area: 1 / 1; opacity: 1; transform: scale(1); filter: blur(0); transition: opacity var(--motion-fast) ease-out, transform var(--motion-fast) ease-out, filter var(--motion-fast) ease-out; }
+.code-copy .code-copied-icon, .code-copy.is-copied .code-copy-icon { opacity: 0; transform: scale(.6); filter: blur(4px); transition-duration: var(--motion-fast-exit); }
+.code-copy.is-copied .code-copied-icon { opacity: 1; transform: scale(1); filter: blur(0); transition-duration: var(--motion-fast); }
+.code-copy.is-copied { color: var(--foreground); }
+.code-copy:disabled { cursor: wait; opacity: .65; }
+.code-copy:focus-visible { outline-offset: -2px; }
+.code-tabs { align-self: center; display: flex; gap: .25rem; min-width: 0; overflow-x: auto; }
+.code-tabs button { position: relative; flex: none; padding: 0 .65rem; border: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: transparent; color: var(--muted-foreground); font-size: var(--fs-caption); line-height: var(--lh-caption); }
+.code-tabs button[aria-selected="true"] { color: var(--foreground); font-weight: var(--weight-semibold); }
+.code-tabs button { display: grid; place-items: center; min-height: var(--control-height); }
+.code-tabs button > span { grid-area: 1 / 1; }
+.code-tabs .code-tab-reserve { visibility: hidden; font-weight: var(--weight-semibold); }
+.code-tabs button[aria-selected="true"]::after { content: ""; position: absolute; bottom: 0; inset-inline: .65rem; height: 2px; background: var(--accent); border-radius: var(--radius-sm); }
+.code-tabs button:focus-visible { outline-offset: -3px; }
+.code-panel { min-width: 0; }
+.code-panel-label { display: block; padding: .5rem 1rem; color: var(--muted-foreground); font-size: var(--fs-caption); border-bottom: 1px solid var(--border-subtle); }
+.code-block:not(.code-block-group) .code-panel-label, .code-block.is-enhanced .code-panel-label { display: none; }
+.code-block-group:not(.is-enhanced) > .code-header { display: none; }
+.code-block-group:not(.is-enhanced) > .code-panel + .code-panel { border-top: 1px solid var(--border-subtle); }
+.prose .code-block pre { margin: 0; padding: 1rem 0; border: 0; border-radius: inherit; background: var(--code-background); color: var(--code-foreground); font-family: var(--font-mono); font-size: var(--fs-body); line-height: var(--lh-body); font-variation-settings: normal; overflow-x: auto; }
+.prose .code-block pre:focus-visible { outline-offset: -3px; }
+.prose .code-block pre code { display: block; min-width: max-content; font: inherit; font-variant-ligatures: none; }
+.code-block .shiki span { color: light-dark(var(--shiki-light, var(--code-foreground)), var(--shiki-dark, var(--code-foreground))); }
+.code-block .line { position: relative; display: inline-block; width: 100%; padding-inline: 1rem; }
+.code-block .line.highlighted { background: var(--code-highlight-background); }
+.code-block .line.diff.add { background: var(--code-insert-background); }
+.code-block .line.diff.remove { background: var(--code-delete-background); }
+.code-block .has-diff .line { padding-inline-start: 2rem; }
+.code-block .line.diff::after { position: absolute; left: .65rem; color: var(--code-foreground); }
+.code-block .line.diff.add::after { content: "+"; }
+.code-block .line.diff.remove::after { content: "−"; }
+.code-block [data-code-line-numbers] .line { padding-inline-start: 3.5rem; }
+.code-block [data-code-line-numbers] .line::before { content: attr(data-line); position: absolute; left: .5rem; width: 2rem; text-align: right; color: var(--muted-foreground); font-variant-numeric: tabular-nums; user-select: none; }
+.code-block [data-code-line-numbers] .line.diff::after { left: 2.8rem; }
+.prose .code-block [data-code-wrap] pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.prose .code-block [data-code-wrap] code { min-width: 0; }
+.code-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.code-block.has-copy-error .code-header { flex-wrap: wrap; }
+.code-block.has-copy-error .code-status { position: static; flex-basis: 100%; width: auto; height: auto; padding-bottom: .5rem; clip-path: none; white-space: normal; color: var(--foreground); font-size: var(--fs-caption); }
+@media (hover: hover) {
+  .code-copy:hover { color: var(--foreground); border-color: var(--border-subtle); background: var(--surface); }
+  .code-tabs button:hover { color: var(--foreground); }
+}
+@media (pointer: coarse) {
+  .code-copy, .code-tabs button { min-height: 2.75rem; }
+  .code-copy { min-width: 2.75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-copy svg, .code-copy.is-copied svg { transform: none; filter: none; transition-property: opacity; }
+}
+@media print {
+  .code-block .code-panel[hidden] { display: block !important; }
+  .code-block .code-panel-label { display: block; }
+  .code-tabs, .code-copy { display: none !important; }
+}

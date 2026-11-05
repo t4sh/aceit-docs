@@ -1,0 +1,22 @@
+/* A semantic list: dates stay beside releases on wide screens and above on mobile. */
+.prose .release-timeline { list-style: none; padding: 0; }
+.prose .release-entry { position: relative; display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 2rem; padding: 0 0 2rem; margin: 0; }
+.release-entry::before { content: ""; position: absolute; inset-block: .4rem 0; inset-inline-start: 8rem; width: 1px; background: var(--border-subtle); }
+.release-entry::after { content: ""; position: absolute; top: .4rem; left: calc(8rem - 3px); width: 7px; height: 7px; border: 1px solid var(--accent); border-radius: var(--radius-round); background: var(--content-surface); }
+.release-entry:first-child::after { background: var(--accent); }
+.release-entry:last-child { padding-bottom: 0; }
+.release-entry:last-child::before { display: none; }
+.release-meta { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; color: var(--muted-foreground); font-size: var(--fs-caption); line-height: var(--lh-caption); }
+.release-version { display: inline-block; padding: .15rem .4rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--foreground); background: var(--surface); font-family: var(--font-mono); }
+.release-content { min-width: 0; }
+.prose .release-content > * { margin-block: 0; }
+.prose .release-content > * + * { margin-block-start: var(--space-block); }
+.prose .release-content h2 { margin-top: 0; }
+.prose .release-content h3 { margin-block-start: var(--space-subheading); }
+.prose .release-content :is(h2, h3) + * { margin-block-start: var(--space-heading-follow); }
+@media (max-width: 50rem) {
+  .prose .release-entry { grid-template-columns: minmax(0, 1fr); gap: var(--space-block); padding-inline-start: 1.5rem; }
+  .release-entry::before { inset-inline-start: 3px; }
+  .release-entry::after { left: 0; }
+  .release-meta { flex-direction: row; align-items: center; gap: .75rem; flex-wrap: wrap; }
+}

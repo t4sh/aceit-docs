@@ -1,0 +1,30 @@
+{
+  "name": "aceit-docs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --port=3001",
+    "build": "eleventy",
+    "check": "npm run test && eleventy --quiet && npm run check:agent-docs",
+    "sync:agent-docs": "bash scripts/sync-agent-docs.sh",
+    "check:agent-docs": "bash scripts/check-agent-docs.sh",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "@11ty/eleventy-navigation": "^1.0.5",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@hugeicons/core-free-icons": "^4.4.0",
+    "@shikijs/markdown-it": "^4.6.0",
+    "@shikijs/transformers": "^4.6.0",
+    "markdown-it": "^15.0.2",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-container": "^4.0.0",
+    "shiki": "^4.6.0"
+  }
+}

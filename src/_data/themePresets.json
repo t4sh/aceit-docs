@@ -1,0 +1,19 @@
+{
+  "presets": [
+    { "id": "aceit-warm", "label": "Aceit Warm" },
+    { "id": "docs-press", "label": "Press" },
+    { "id": "docs-workshop", "label": "Workshop" },
+    { "id": "docs-relay", "label": "Relay" },
+    { "id": "docs-tempo", "label": "Tempo" },
+    { "id": "docs-ledger", "label": "Ledger" },
+    { "id": "docs-bookleaf", "label": "Bookleaf" },
+    { "id": "docs-beacon", "label": "Beacon" },
+    { "id": "docs-foundry", "label": "Foundry" },
+    { "id": "docs-linen", "label": "Linen" }
+  ],
+  "palettes": [
+    { "id": "muted", "label": "Muted" },
+    { "id": "bright", "label": "Bright" },
+    { "id": "rich", "label": "Rich" }
+  ]
+}

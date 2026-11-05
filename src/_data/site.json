@@ -1,0 +1,9 @@
+{
+  "name": "Aceit Docs",
+  "themeVariant": "aceit-warm",
+  "themePalette": "muted",
+  "brand": "Aceit",
+  "description": "A lightweight Eleventy documentation starter based on Aceit Demo Kit and Aceit Kit Starter",
+  "externalUrl": "https://www.11ty.dev/docs/",
+  "externalLabel": "Eleventy docs"
+}

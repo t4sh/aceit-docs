@@ -1,0 +1,22 @@
+/* Aceit Warm: Aceit Demo Kit's warm palette with a quieter documentation shell. */
+:root[data-theme-variant="aceit-warm"] {
+  color-scheme: light dark;
+  --background: light-dark(oklch(0.955 0.006 75), oklch(0.205 0.005 75));
+  --content-surface: light-dark(oklch(0.985 0.002 85), oklch(0.265 0.005 75));
+  --foreground: light-dark(oklch(0.18 0 0), oklch(0.97 0.002 85));
+  --card: light-dark(oklch(1 0 0), oklch(0.29 0.005 75));
+  --muted: light-dark(oklch(0.94 0.006 75), oklch(0.25 0.005 75));
+  --muted-foreground: light-dark(oklch(0.42 0.008 75), oklch(0.76 0.005 75));
+  --subtle-foreground: var(--muted-foreground);
+  --border: light-dark(oklch(0.62 0.006 75), oklch(0.55 0.005 75));
+  --border-subtle: light-dark(oklch(0.89 0.006 75), oklch(0.38 0.005 75));
+  --primary: light-dark(oklch(0.7 0.19 55.15), oklch(0.82 0.14 70));
+  --primary-foreground: light-dark(oklch(0.15 0.04 55), oklch(0.15 0.04 39));
+  --link: light-dark(oklch(0.4 0.12 55), oklch(0.86 0.13 70));
+  --link-hover: light-dark(oklch(0.32 0.1 55), oklch(0.94 0.06 85));
+  --primary-soft: light-dark(oklch(0.95 0.05 85), oklch(0.37 0.055 55));
+  --status: light-dark(oklch(0.45 0.14 150), oklch(0.73 0.13 150));
+}
+
+:root[data-theme-variant="aceit-warm"][data-theme="light"] { color-scheme: only light; }
+:root[data-theme-variant="aceit-warm"][data-theme="dark"] { color-scheme: only dark; }

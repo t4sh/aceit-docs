@@ -1,0 +1,6 @@
+- id: decisions/stay-on-eleventy
+  type: decision
+  title: "Stay on Eleventy rather than Astro"
+  status: active
+  description: "Eleventy 3 with plain Markdown and no bundler; see ADR 0001"
+  tags: [eleventy, astro, framework, build]

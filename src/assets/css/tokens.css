@@ -1,0 +1,71 @@
+/* Shared semantic roles, type rhythm, and geometry. Presets choose the font families. */
+@font-face {
+  font-family: "Inter Variable";
+  src: url("fonts/inter-latin-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --font-body: "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: var(--font-body);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --variation-body: "opsz" 14;
+  --variation-emphasis: "opsz" 18;
+  --variation-display: "opsz" 25;
+  --optical-sizing: none;
+  --fs-display: 28px;
+  --lh-display: 34px;
+  --fs-title: 16px;
+  --lh-title: 22px;
+  --fs-subtitle: 14px;
+  --lh-subtitle: 20px;
+  --fs-body: 13px;
+  --lh-body: 20px;
+  --fs-caption: 12px;
+  --lh-caption: 16px;
+  --fs-micro: 11px;
+  --lh-micro: 14px;
+  --weight-normal: 400;
+  --weight-semibold: 550;
+  --weight-bold: 700;
+  --space-block: 12px;
+  --space-heading: 24px;
+  --space-subheading: 20px;
+  --space-heading-follow: 8px;
+  --space-list-item: 4px;
+  --space-rule: 24px;
+  --control-height: 36px;
+  --control-compact: 28px;
+  --motion-fast: 80ms;
+  --motion-fast-exit: 60ms;
+  --motion-moderate: 160ms;
+  --motion-moderate-exit: 120ms;
+  --motion-slow: 240ms;
+  --motion-settle: cubic-bezier(.16, 1, .3, 1);
+  --code-inline-background: var(--muted);
+  --code-inline-foreground: var(--foreground);
+  --sidebar-width: 16.5rem;
+  --toc-width: 13.5rem;
+  --content-width: 39rem;
+  /* Every appearance sets one radius; smaller surfaces keep its proportions. */
+  --radius-panel: 1rem;
+  --radius-sm: calc(var(--radius-panel) * .25);
+  --radius-md: calc(var(--radius-panel) * .5);
+  --radius-lg: calc(var(--radius-panel) * .75);
+  --radius-round: 50%;
+
+  /* Component aliases follow the selected palette. */
+  --surface: var(--card);
+  --surface-hover: var(--muted);
+  --border-strong: var(--border);
+  --accent: var(--link);
+  --accent-hover: var(--link-hover);
+  --accent-soft: var(--primary-soft);
+  --accent-foreground: var(--primary-foreground);
+
+  font-family: var(--font-body);
+  font-synthesis: style;
+  text-rendering: optimizeLegibility;
+}

@@ -1,0 +1,9 @@
+{% macro entry(id, version, date, dateLabel, title) %}
+<li class="release-entry">
+  <div class="release-meta"><time datetime="{{ date }}">{{ dateLabel }}</time><span class="release-version">{{ version }}</span></div>
+  <div class="release-content">
+    <h2 id="{{ id }}">{{ title }}<a class="header-anchor" href="#{{ id }}" aria-label="Link to {{ title }}">{% icon "link" %}</a></h2>
+    {{ caller() }}
+  </div>
+</li>
+{% endmacro %}

@@ -1,0 +1,7 @@
+node_modules/
+out/
+_site/
+.DS_Store
+
+# Optional, independently downloaded fonts are not part of the template.
+/src/assets/fonts/optional/

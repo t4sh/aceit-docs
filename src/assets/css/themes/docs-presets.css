@@ -1,0 +1,130 @@
+/* Self-contained documentation presets. All share the same type and spacing roles. */
+:root[data-theme-variant^="docs-"] {
+  color-scheme: light dark;
+  --font-mono: "IBM Plex Mono Docs", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --variation-body: normal;
+  --variation-emphasis: normal;
+  --variation-display: normal;
+  --optical-sizing: auto;
+  --preset-surface-chroma: var(--palette-surface-chroma);
+  --preset-dark-chroma: var(--palette-dark-chroma);
+  --preset-accent-chroma: var(--palette-accent-chroma);
+  --background: light-dark(oklch(var(--palette-background-light) var(--preset-surface-chroma) var(--preset-hue)), oklch(var(--palette-background-dark) var(--preset-dark-chroma) var(--preset-hue)));
+  --content-surface: light-dark(oklch(var(--palette-content-light) calc(var(--preset-surface-chroma) * .45) var(--preset-hue)), oklch(var(--palette-content-dark) var(--preset-dark-chroma) var(--preset-hue)));
+  --foreground: light-dark(oklch(.18 .002 var(--preset-hue)), oklch(.97 .002 var(--preset-hue)));
+  --card: light-dark(oklch(.995 calc(var(--preset-surface-chroma) * .3) var(--preset-hue)), oklch(var(--palette-card-dark) var(--preset-dark-chroma) var(--preset-hue)));
+  --muted: light-dark(oklch(var(--palette-muted-light) var(--preset-surface-chroma) var(--preset-hue)), oklch(var(--palette-muted-dark) var(--preset-dark-chroma) var(--preset-hue)));
+  --muted-foreground: light-dark(oklch(.40 .004 var(--preset-hue)), oklch(.76 .004 var(--preset-hue)));
+  --subtle-foreground: var(--muted-foreground);
+  --border: light-dark(oklch(.62 .004 var(--preset-hue)), oklch(.55 .004 var(--preset-hue)));
+  --border-subtle: light-dark(oklch(.87 var(--preset-surface-chroma) var(--preset-hue)), oklch(.38 var(--preset-dark-chroma) var(--preset-hue)));
+  --primary: light-dark(oklch(var(--palette-primary-light) var(--preset-accent-chroma) var(--preset-hue)), oklch(.80 calc(var(--preset-accent-chroma) * .8) var(--preset-hue)));
+  --primary-foreground: oklch(.16 .01 var(--preset-hue));
+  --link: light-dark(oklch(.38 calc(var(--preset-accent-chroma) * .9) var(--preset-hue)), oklch(.84 calc(var(--preset-accent-chroma) * .7) var(--preset-hue)));
+  --link-hover: light-dark(oklch(.29 calc(var(--preset-accent-chroma) * .75) var(--preset-hue)), oklch(.94 calc(var(--preset-accent-chroma) * .3) var(--preset-hue)));
+  --primary-soft: light-dark(oklch(.92 calc(var(--preset-surface-chroma) * 1.4) var(--preset-hue)), oklch(.36 calc(var(--preset-dark-chroma) * 1.4) var(--preset-hue)));
+  --table-header-surface: light-dark(oklch(.92 .004 80), oklch(.40 .006 80));
+  --status: light-dark(oklch(.45 .14 150), oklch(.73 .13 150));
+}
+
+:root[data-theme-variant^="docs-"][data-theme="light"] { color-scheme: only light; }
+:root[data-theme-variant^="docs-"][data-theme="dark"] { color-scheme: only dark; }
+
+/* Palette changes accent strength; reading surfaces retain a near-neutral ground. */
+:root[data-palette="muted"] {
+  --palette-background-light: .955;
+  --palette-content-light: .985;
+  --palette-muted-light: .94;
+  --palette-background-dark: .205;
+  --palette-content-dark: .265;
+  --palette-card-dark: .29;
+  --palette-muted-dark: .25;
+  --palette-surface-chroma: .003;
+  --palette-dark-chroma: .004;
+  --palette-primary-light: .71;
+  --palette-accent-chroma: .12;
+}
+
+:root[data-palette="bright"] {
+  --palette-background-light: .97;
+  --palette-content-light: .995;
+  --palette-muted-light: .95;
+  --palette-background-dark: .21;
+  --palette-content-dark: .28;
+  --palette-card-dark: .32;
+  --palette-muted-dark: .265;
+  --palette-surface-chroma: .003;
+  --palette-dark-chroma: .004;
+  --palette-primary-light: .68;
+  --palette-accent-chroma: .16;
+}
+
+:root[data-palette="rich"] {
+  --palette-background-light: .95;
+  --palette-content-light: .985;
+  --palette-muted-light: .935;
+  --palette-background-dark: .18;
+  --palette-content-dark: .245;
+  --palette-card-dark: .285;
+  --palette-muted-dark: .235;
+  --palette-surface-chroma: .005;
+  --palette-dark-chroma: .006;
+  --palette-primary-light: .64;
+  --palette-accent-chroma: .18;
+}
+
+/* Each direction keeps the shared type scale while selecting its own font pairing. */
+:root[data-theme-variant="docs-workshop"] { --preset-hue: 255; --font-body: "IBM Plex Sans Docs", ui-sans-serif, sans-serif; --font-heading: var(--font-body); --radius-panel: .65rem; }
+:root[data-theme-variant="docs-relay"] { --preset-hue: 325; --font-body: "IBM Plex Sans Docs", ui-sans-serif, sans-serif; --font-heading: "Manrope Docs", ui-sans-serif, sans-serif; --radius-panel: 1.25rem; }
+:root[data-theme-variant="docs-tempo"] { --preset-hue: 145; --font-body: "Source Sans 3 Docs", ui-sans-serif, sans-serif; --font-heading: "Lora Docs", Georgia, serif; --radius-panel: 1rem; }
+:root[data-theme-variant="docs-ledger"] { --preset-hue: 86; --font-body: "IBM Plex Sans Docs", ui-sans-serif, sans-serif; --font-heading: "Merriweather Docs", Georgia, serif; --radius-panel: .45rem; }
+:root[data-theme-variant="docs-bookleaf"] { --preset-hue: 45; --font-body: "Source Sans 3 Docs", ui-sans-serif, sans-serif; --font-heading: "Fraunces Docs", Georgia, serif; --radius-panel: 1.35rem; }
+:root[data-theme-variant="docs-beacon"] { --preset-hue: 72; --font-body: "Geist Docs", ui-sans-serif, sans-serif; --font-heading: var(--font-body); --radius-panel: .8rem; }
+:root[data-theme-variant="docs-foundry"] { --preset-hue: 260; --preset-surface-chroma: calc(var(--palette-surface-chroma) * .35); --preset-dark-chroma: calc(var(--palette-dark-chroma) * .5); --preset-accent-chroma: calc(var(--palette-accent-chroma) * .55); --font-body: "Geist Docs", ui-sans-serif, sans-serif; --font-heading: "Mozilla Headline Docs", ui-sans-serif, sans-serif; --radius-panel: 1rem; }
+
+/* Press adapts the separate paper-and-signal system as a fixed docs palette. */
+:root[data-theme-variant="docs-press"] {
+  --font-body: "Atkinson Hyperlegible Docs", "Geist Docs", ui-sans-serif, sans-serif;
+  --font-heading: "Cooper Hewitt Docs", "Geist Docs", ui-sans-serif, sans-serif;
+  --background: light-dark(oklch(.945 .01 82), oklch(.24 .01 78));
+  --content-surface: light-dark(oklch(.982 .0054 82), oklch(.30 .012 78));
+  --foreground: light-dark(oklch(.15 .012 78), oklch(.95 .005 78));
+  --card: light-dark(oklch(.982 .0054 82), oklch(.34 .012 79));
+  --muted: light-dark(oklch(.945 .01 82), oklch(.34 .012 79));
+  --muted-foreground: light-dark(oklch(.41 .008 78), oklch(.76 .008 78));
+  --subtle-foreground: var(--muted-foreground);
+  --border: light-dark(oklch(.30 .008 78), oklch(.66 .008 78));
+  --border-subtle: light-dark(oklch(.88 .012 82), oklch(.43 .012 79));
+  --primary: light-dark(oklch(.69 .19 56), oklch(.77 .16 56));
+  --primary-foreground: oklch(.15 .012 78);
+  --link: light-dark(oklch(.47 .18 56), oklch(.80 .13 56));
+  --link-hover: light-dark(oklch(.38 .16 56), oklch(.91 .06 56));
+  --primary-soft: light-dark(oklch(.94 .025 56), oklch(.36 .035 56));
+  --status: light-dark(oklch(.45 .14 150), oklch(.73 .13 150));
+  --radius-panel: .5rem;
+
+}
+
+/* Linen uses the four supplied neutrals as distinct light-mode surfaces. */
+:root[data-theme-variant="docs-linen"] {
+  --font-body: "Geist Docs", ui-sans-serif, sans-serif;
+  --font-heading: Georgia, serif;
+  --background: light-dark(#f2f1ea, #24221f); /* Coconut White */
+  --content-surface: light-dark(#fcf6ed, #302d29); /* Cream Veil */
+  --card: light-dark(#faf0e6, #38332e); /* Linen */
+  --muted: light-dark(#f0eee9, #403a34); /* Cloud Dancer */
+  --foreground: light-dark(#211e1b, #f6f0e8);
+  --muted-foreground: light-dark(#625b54, #d4c8ba);
+  --subtle-foreground: var(--muted-foreground);
+  --border: light-dark(#786d63, #aa9987);
+  --border-subtle: light-dark(#d7d0c7, #5c5147);
+  --primary: light-dark(#674d3b, #dec0a1);
+  --primary-foreground: light-dark(#fcf6ed, #24221f);
+  --link: light-dark(#654a36, #eacba8);
+  --link-hover: light-dark(#483526, #fce6c8);
+  --primary-soft: light-dark(#e8d9ca, #4b4036);
+  --table-header-surface: var(--muted);
+  --status: light-dark(#486d55, #91b89b);
+  --radius-panel: 1.15rem;
+
+}

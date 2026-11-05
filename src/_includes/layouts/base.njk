@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" data-theme-variant="{{ site.themeVariant }}" data-palette="{{ site.themePalette }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="{{ description or site.description }}">
+  <title>{{ title }} · {{ site.name }}</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>try{const r=document.documentElement;const t=localStorage.getItem('theme-preference');if(t==='light'||t==='dark')r.dataset.theme=t;const v=localStorage.getItem('docs-preset');if({{ themePresets.presets | jsonScript | safe }}.some(item=>item.id===v))r.dataset.themeVariant=v;const p=localStorage.getItem('docs-palette');if({{ themePresets.palettes | jsonScript | safe }}.some(item=>item.id===p))r.dataset.palette=p}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/code-blocks.js"></script>
+</head>
+<body>
+  {{ content | safe }}
+</body>
+</html>
