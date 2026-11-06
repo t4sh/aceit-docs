@@ -15,6 +15,10 @@ npm run dev
 
 The dev server requests port 3001 so it can sit beside the sibling projects; use the URL Eleventy prints if that port is occupied. `npm run build` generates `out/`; `npm run check` runs the tests, builds the site, and checks that `CLAUDE.md` mirrors `AGENTS.md`.
 
+## Deploy
+
+`npm run build` writes plain files to `out/`, which you can copy to any static host, at the root or in a subfolder. The [deployment guide](src/pages/docs/guides/deploying.md) has setup for GitHub Pages, Cloudflare Pages, and Vercel. `vercel.json` is only for Vercel, so delete it if you host elsewhere.
+
 ## Add a page
 
 Create a Markdown file under `src/pages/docs/`. Directory data gives it the docs layout and adds it to the `docs` collection. Add front matter:
