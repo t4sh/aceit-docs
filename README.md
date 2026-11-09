@@ -51,6 +51,7 @@ Use `parent: Getting started` under `eleventyNavigation` to nest it below that p
 ## Customize
 
 - Change the name and links in `src/_data/site.json`.
+- To show **Edit this page** below each article, set `githubRepo` to your `owner/repo` and `githubBranch` to the branch containing your docs source (for example, `main`) in `src/_data/site.json`. The link is hidden if either setting is blank.
 - Choose one of ten local presets in the Appearance menu. Seven docs presets offer Muted, Bright, and Rich palettes; Aceit Warm, Press, and Linen keep fixed colors. Presets also select local heading and body fonts. Press uses Atkinson Hyperlegible with Geist as its fallback; Foundry uses Geist. Supreme is optional and is not bundled: download it separately from Fontshare and follow the [installation instructions](src/pages/docs/guides/theming.md#optional-supreme-installation) to use it on your own site. Edit the theme CSS in `src/assets/css/themes/`; the shared type scale, dimensions, and component aliases live in `src/assets/css/tokens.css`.
 - Adjust docs layout and components in `src/assets/css/docs.css`.
 - Change the layout chain in `src/_includes/layouts/base.njk` and `docs.njk`.

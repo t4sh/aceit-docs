@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-test("public metadata uses the hosted subfolder and an offline rebuild clears it", (t) => {
+test("public metadata and the preview repository link follow the build target", (t) => {
   const output = mkdtempSync(join(tmpdir(), "aceit-docs-publishing-"));
   t.after(() => rmSync(output, { recursive: true, force: true }));
   const root = fileURLToPath(new URL("../", import.meta.url));
@@ -21,6 +21,7 @@ test("public metadata uses the hosted subfolder and an offline rebuild clears it
   assert.match(hosted, /rel="canonical" href="https:\/\/example\.com\/manual\/getting-started\/installation\/"/);
   assert.match(hosted, /property="og:image" content="https:\/\/example\.com\/manual\/assets\/social-preview\.png"/);
   assert.match(hosted, /href="\.\.\/\.\.\/assets\/styles\.css"/);
+  assert.doesNotMatch(hosted, /View repository on GitHub/);
   assert.match(read("sitemap.xml"), /<loc>https:\/\/example\.com\/manual\/getting-started\/installation\/<\/loc>/);
   assert.match(read("robots.txt"), /Sitemap: https:\/\/example\.com\/manual\/sitemap\.xml/);
 
@@ -30,7 +31,13 @@ test("public metadata uses the hosted subfolder and an offline rebuild clears it
     VERCEL_PROJECT_PRODUCTION_URL: "aceit-docs.vercel.app",
   });
   assert.doesNotMatch(read(page), /rel="canonical"|property="og:/);
+  assert.doesNotMatch(read(page), /View repository on GitHub/);
   assert.doesNotMatch(read("sitemap.xml"), /<loc>/);
   assert.doesNotMatch(read("robots.txt"), /Sitemap:/);
   assert.match(read(page), /href="\.\.\/\.\.\/assets\/styles\.css"/);
+
+  build({ SITE_BASE_URL: "", VERCEL_ENV: "production", VERCEL_PROJECT_PRODUCTION_URL: "aceit-docs.vercel.app" });
+  for (const file of ["index.html", page]) {
+    assert.match(read(file), /href="https:\/\/github\.com\/t4sh\/aceit-docs" aria-label="View repository on GitHub"[^>]*>\s*<svg\b/);
+  }
 });

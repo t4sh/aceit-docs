@@ -74,9 +74,20 @@ layout: layouts/base.njk
             {% icon "search" %}
             <span>Search</span><kbd aria-hidden="true">{% icon "command" %} K</kbd>
           </button>
+          {% if publishing.githubUrl %}
+            <a class="icon-button" href="{{ publishing.githubUrl | escape }}" aria-label="View repository on GitHub" title="View repository on GitHub">
+              {% icon "github" %}
+            </a>
+          {% endif %}
         </div>
         <div class="page-heading{% if starterHome %} starter-heading{% endif %}"><h1>{{ title }}</h1>{% if description %}<p class="lead">{{ description }}</p>{% endif %}</div>
-        <article class="prose" id="article">{{ content | safe }}</article>
+        <article class="prose" id="article">
+          {{ content | safe }}
+          {% set editUrl = page.inputPath | githubEditUrl(site.githubRepo, site.githubBranch) %}
+          {% if editUrl %}
+            <footer><a href="{{ editUrl | escape }}">Edit this page</a></footer>
+          {% endif %}
+        </article>
         <nav class="page-nav" aria-label="Previous and next pages">
           {% if previous %}<a href="{{ previous.url }}"><small>Previous</small><span>{% icon "arrow-left" %} {{ previous.title }}</span></a>{% else %}<span></span>{% endif %}
           {% if next %}<a class="next" href="{{ next.url }}"><small>Next</small><span>{{ next.title }} {% icon "arrow-right" %}</span></a>{% endif %}

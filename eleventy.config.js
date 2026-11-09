@@ -4,12 +4,13 @@ import markdownItAnchor from "markdown-it-anchor";
 import { createCodeBlocksPlugin } from "./lib/code-blocks.js";
 import { icon } from "./lib/icons.js";
 import { relativeUrl } from "./lib/relative-urls.js";
-import { jsonScript } from "./lib/template-data.js";
+import { githubEditUrl, jsonScript } from "./lib/template-data.js";
 
 export default async function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addShortcode("icon", icon);
   eleventyConfig.addFilter("jsonScript", jsonScript);
+  eleventyConfig.addFilter("githubEditUrl", githubEditUrl);
 
   // Relative links let the built site run from any folder or straight from disk.
   eleventyConfig.htmlTransformer.addUrlTransform("html", function (url) {

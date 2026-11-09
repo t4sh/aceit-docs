@@ -7,5 +7,7 @@
   "socialImage": "/assets/social-preview.png",
   "socialImageAlt": "Aceit Docs. Eleventy documentation starter.",
   "externalUrl": "https://www.11ty.dev/docs/",
-  "externalLabel": "Eleventy docs"
+  "externalLabel": "Eleventy docs",
+  "githubRepo": "",
+  "githubBranch": ""
 }
