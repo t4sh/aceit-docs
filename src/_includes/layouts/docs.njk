@@ -68,14 +68,14 @@ layout: layouts/base.njk
           {% if eleventyNavigation.parent %}
             <div class="breadcrumb"><a href="/">Docs</a>{% icon "chevron-right" %}<span>{{ title }}</span></div>
           {% else %}
-            <div class="breadcrumb"><span>Docs</span>{% icon "chevron-right" %}<span>{{ title }}</span></div>
+            <div class="breadcrumb"><span>Docs</span>{% icon "chevron-right" %}<span>{{ eleventyNavigation.key or title }}</span></div>
           {% endif %}
           <button class="search-trigger" type="button" data-search-open aria-label="Search documentation" aria-keyshortcuts="Meta+K Control+K">
             {% icon "search" %}
             <span>Search</span><kbd aria-hidden="true">{% icon "command" %} K</kbd>
           </button>
         </div>
-        <div class="page-heading"><h1>{{ title }}</h1>{% if description %}<p class="lead">{{ description }}</p>{% endif %}</div>
+        <div class="page-heading{% if starterHome %} starter-heading{% endif %}"><h1>{{ title }}</h1>{% if description %}<p class="lead">{{ description }}</p>{% endif %}</div>
         <article class="prose" id="article">{{ content | safe }}</article>
         <nav class="page-nav" aria-label="Previous and next pages">
           {% if previous %}<a href="{{ previous.url }}"><small>Previous</small><span>{% icon "arrow-left" %} {{ previous.title }}</span></a>{% else %}<span></span>{% endif %}

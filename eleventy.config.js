@@ -65,6 +65,7 @@ export default async function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy({ "src/assets/app.js": "assets/app.js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/code-blocks.js": "assets/code-blocks.js" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/social-preview.png": "assets/social-preview.png" });
   eleventyConfig.addPassthroughCopy({ "node_modules/@hugeicons/core-free-icons/LICENSE.md": "assets/licenses/hugeicons-MIT.txt" });
   eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource-variable/inter/files/inter-latin-standard-normal.woff2": "assets/fonts/inter-latin-variable.woff2" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });

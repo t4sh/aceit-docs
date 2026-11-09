@@ -21,6 +21,18 @@ Aceit Docs is a reusable Eleventy and Nunjucks starter. These links record the e
 | [Starlight](https://starlight.astro.build/) | A reference for a complete docs experience, especially sidebar navigation, search, readable type, and theme controls. |
 | [Nextra Docs Template](https://github.com/shuding/nextra-docs-template) | A Next.js documentation template for comparing page layout and navigation conventions. |
 
+## Starter comparison
+
+| Starter reference | Idea applied in Aceit Docs |
+| --- | --- |
+| [Eleventy Base Blog](https://demo-base-blog.11ty.dev/) and [One Starter](https://starter.buildawesome.one/) | Put the first editable file on the homepage and show the main content folders in the README. |
+| [Eleventy Notes](https://eleventy-notes.sandroroth.com/) | Show search and appearance controls on the live docs site so visitors can try them. |
+| [Elva](https://elva.scott.ee/) | Give the homepage a stronger typographic identity and demonstrate features with working links. |
+| [ZeroPoint](https://getzeropoint.com/) | Link the primary demo action directly to GitHub's template creation flow. |
+| [Eleventy Excellent](https://github.com/madrilene/eleventy-excellent) | Publish canonical URLs, a sitemap, and a share image with the static output. |
+
+The [Build Awesome One comparison](https://buildawesome.one/starters/) lists these starters. The [official Eleventy directory](https://www.11ty.dev/docs/starter/) and the [11ty Bundle](https://11tybundle.dev/starters/) describe their own listing and selection methods.
+
 ## Visual system
 
 | Reference | What to study |

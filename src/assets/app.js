@@ -383,6 +383,12 @@ async function openSearch() {
 
 document.querySelector("[data-search-open]").addEventListener("click", openSearch);
 document.querySelector("[data-search-close]").addEventListener("click", () => dialog.close());
+dialog.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  // A search input otherwise consumes the first Escape when it has text.
+  event.preventDefault();
+  dialog.close();
+});
 document.addEventListener("keydown", (event) => {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
     event.preventDefault();

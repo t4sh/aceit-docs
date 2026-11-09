@@ -1,33 +1,37 @@
 ---
-title: Introduction
-description: Documentation built with Eleventy, Nunjucks, and Markdown.
+title: Aceit Docs
+metaTitle: Aceit Docs — Eleventy Documentation Starter
+description: Write your docs in plain Markdown. Publish a searchable site you can host anywhere or open straight from disk.
+starterHome: true
 permalink: /
 eleventyNavigation:
-  key: Introduction
+  key: Overview
   order: 1
 ---
 
-**Aceit Docs** turns Markdown files into a static documentation site. Page metadata builds the navigation; appearance presets control the fonts, colors, and corner shapes.
+<div class="starter-actions">
+  <a class="starter-action starter-action-primary" href="https://github.com/t4sh/aceit-docs/generate">Use this template</a>
+  <a class="starter-action" href="/guides/writing-pages/">Write your first page</a>
+</div>
 
 ## Start here
 
-Install the dependencies and start the local preview:
+With Node.js 22 or newer, run these commands from your copy of the template:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the address Eleventy prints in your terminal. The first page to change is `src/pages/docs/index.md`.
+Open the address Eleventy prints, then edit `src/pages/docs/index.md`. Save the file to see your first change in the browser.
 
 ## What you get
 
-- A responsive sidebar and page outline
-- Search over generated page content
-- Light, dark, and system theme choices
-- Reusable callouts, quotations, tables, code blocks, and release timelines
-- A static output folder ready for any static host
+- **Navigation from Markdown.** Page metadata builds the sidebar, and headings build the page outline.
+- **Offline search.** Search across titles and page content, even when you open the built site from disk.
+- **Appearance presets.** Open **Appearance** in the sidebar to try a preset or [see how to customize it](/guides/theming/).
+- **Ready-to-use examples.** Try [code tabs, callouts, and tables](/guides/components/) or see a [release timeline](/release-notes/).
 
 ## Where to go next
 
-Read [Installation](/getting-started/installation/) to set up the project, then [Write a page](/guides/writing-pages/) to add your own documentation.
+Set your name and links in `src/_data/site.json`. When your first pages are ready, [deploy the site](/guides/deploying/) or share the built folder.

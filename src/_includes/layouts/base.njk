@@ -4,8 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="{{ description or site.description }}">
-  <title>{{ title }} · {{ site.name }}</title>
+  {% set pageDescription = description or site.description %}
+  {% set pageTitle = metaTitle or (title ~ " · " ~ site.name) %}
+  <meta name="description" content="{{ pageDescription | escape }}">
+  <title>{{ pageTitle | escape }}</title>
+  {% if publishing.baseUrl %}
+    {% set publicUrl = publishing.baseUrl ~ page.url %}
+    <link rel="canonical" href="{{ publicUrl | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.name | escape }}">
+    <meta property="og:title" content="{{ pageTitle | escape }}">
+    <meta property="og:description" content="{{ pageDescription | escape }}">
+    <meta property="og:url" content="{{ publicUrl | escape }}">
+    {% if site.socialImage %}
+      <meta property="og:image" content="{{ (publishing.baseUrl ~ site.socialImage) | escape }}">
+      <meta property="og:image:alt" content="{{ (site.socialImageAlt or site.name) | escape }}">
+      <meta name="twitter:card" content="summary_large_image">
+    {% endif %}
+  {% endif %}
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <script>try{const r=document.documentElement;const t=localStorage.getItem('theme-preference');if(t==='light'||t==='dark')r.dataset.theme=t;const v=localStorage.getItem('docs-preset');if({{ themePresets.presets | jsonScript | safe }}.some(item=>item.id===v))r.dataset.themeVariant=v;const p=localStorage.getItem('docs-palette');if({{ themePresets.palettes | jsonScript | safe }}.some(item=>item.id===p))r.dataset.palette=p}catch(e){}</script>
   <link rel="stylesheet" href="/assets/styles.css">

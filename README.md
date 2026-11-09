@@ -1,8 +1,10 @@
 # Aceit Docs
 
-A reusable Eleventy and Nunjucks documentation starter. It takes its project structure and layout chain from [Aceit Kit Starter](https://github.com/t4sh/aceit-kit-starter), and adapts the warm semantic colors and crisp geometry of Aceit Demo Kit for long-form reading.
+An Eleventy documentation starter with plain Markdown, offline search, and theme presets. Build a static site you can publish on any host or open directly from disk.
 
-The published site is static HTML, CSS, self-hosted fonts, and small JavaScript files. It has no client framework, third-party font request, or browser Tailwind runtime. The authoring CSS is combined into one output file during the Eleventy build.
+[Live demo](https://aceit-docs.vercel.app/) · [Use this template](https://github.com/t4sh/aceit-docs/generate) · [Component examples](https://aceit-docs.vercel.app/guides/components/)
+
+![Aceit Docs overview with its sidebar, quick start, and page outline](docs/references/preview.webp)
 
 ## Run it
 
@@ -13,11 +15,21 @@ npm install
 npm run dev
 ```
 
-The dev server requests port 3001 so it can sit beside the sibling projects; use the URL Eleventy prints if that port is occupied. `npm run build` generates `out/`; `npm run check` runs the tests, builds the site, and checks that `CLAUDE.md` mirrors `AGENTS.md`.
+Open the address Eleventy prints. Edit [the homepage](src/pages/docs/index.md), save it, and watch the preview reload. Then change your site name and links in [site.json](src/_data/site.json).
 
-## Deploy
+```text
+src/
+├── pages/docs/   Markdown pages and navigation metadata
+├── _data/       Site name, links, and appearance presets
+├── _includes/   Nunjucks layouts and macros
+└── assets/      CSS, fonts, and browser scripts
+```
 
-`npm run build` writes plain files to `out/`, which you can copy to any static host, at the root or in a subfolder. The [deployment guide](src/pages/docs/guides/deploying.md) has setup for GitHub Pages, Cloudflare Pages, and Vercel. `vercel.json` is only for Vercel, so delete it if you host elsewhere.
+## Build and deploy
+
+`npm run build` writes HTML, CSS, self-hosted fonts, and small browser scripts to `out/`. Open `out/index.html` from disk or copy the folder to any static host. For a public site, set `SITE_BASE_URL` to the final URL to generate canonical links, social cards, and a sitemap. The [deployment guide](src/pages/docs/guides/deploying.md) covers GitHub Pages, Cloudflare Pages, and Vercel.
+
+`npm run check` runs the tests, builds the site, and checks that `CLAUDE.md` mirrors `AGENTS.md`.
 
 ## Add a page
 
