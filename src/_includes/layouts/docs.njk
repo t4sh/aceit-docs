@@ -83,7 +83,7 @@ layout: layouts/base.njk
         <div class="page-heading{% if starterHome %} starter-heading{% endif %}"><h1>{{ title }}</h1>{% if description %}<p class="lead">{{ description }}</p>{% endif %}</div>
         <article class="prose" id="article">
           {{ content | safe }}
-          {% set editUrl = page.inputPath | githubEditUrl(site.githubRepo, site.githubBranch) %}
+          {% set editUrl = page.inputPath | githubEditUrl(publishing.githubRepo or site.githubRepo, publishing.githubBranch or site.githubBranch) %}
           {% if editUrl %}
             <footer><a href="{{ editUrl | escape }}">Edit this page</a></footer>
           {% endif %}

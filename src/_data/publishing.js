@@ -11,8 +11,8 @@ export default function () {
   }
 
   const baseUrl = url.origin + url.pathname.replace(/\/+$/, "");
-  return {
-    baseUrl,
-    githubUrl: baseUrl === "https://aceit-docs.vercel.app" ? "https://github.com/t4sh/aceit-docs" : "",
-  };
+  if (baseUrl !== "https://aceit-docs.vercel.app") return { baseUrl };
+
+  const githubRepo = "t4sh/aceit-docs";
+  return { baseUrl, githubRepo, githubBranch: "main", githubUrl: `https://github.com/${githubRepo}` };
 }

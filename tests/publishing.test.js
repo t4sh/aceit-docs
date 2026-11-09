@@ -22,6 +22,7 @@ test("public metadata and the preview repository link follow the build target", 
   assert.match(hosted, /property="og:image" content="https:\/\/example\.com\/manual\/assets\/social-preview\.png"/);
   assert.match(hosted, /href="\.\.\/\.\.\/assets\/styles\.css"/);
   assert.doesNotMatch(hosted, /View repository on GitHub/);
+  assert.doesNotMatch(hosted, />Edit this page<\/a>/);
   assert.match(read("sitemap.xml"), /<loc>https:\/\/example\.com\/manual\/getting-started\/installation\/<\/loc>/);
   assert.match(read("robots.txt"), /Sitemap: https:\/\/example\.com\/manual\/sitemap\.xml/);
 
@@ -32,6 +33,7 @@ test("public metadata and the preview repository link follow the build target", 
   });
   assert.doesNotMatch(read(page), /rel="canonical"|property="og:/);
   assert.doesNotMatch(read(page), /View repository on GitHub/);
+  assert.doesNotMatch(read(page), />Edit this page<\/a>/);
   assert.doesNotMatch(read("sitemap.xml"), /<loc>/);
   assert.doesNotMatch(read("robots.txt"), /Sitemap:/);
   assert.match(read(page), /href="\.\.\/\.\.\/assets\/styles\.css"/);
@@ -40,4 +42,6 @@ test("public metadata and the preview repository link follow the build target", 
   for (const file of ["index.html", page]) {
     assert.match(read(file), /href="https:\/\/github\.com\/t4sh\/aceit-docs" aria-label="View repository on GitHub"[^>]*>\s*<svg\b/);
   }
+  assert.match(read("index.html"), /href="https:\/\/github\.com\/t4sh\/aceit-docs\/edit\/main\/src\/pages\/docs\/index\.md">Edit this page<\/a>/);
+  assert.match(read(page), /href="https:\/\/github\.com\/t4sh\/aceit-docs\/edit\/main\/src\/pages\/docs\/getting-started\/installation\.md">Edit this page<\/a>/);
 });
