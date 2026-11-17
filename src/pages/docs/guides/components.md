@@ -10,16 +10,17 @@ eleventyNavigation:
 
 ## Callouts
 
-Markdown blockquotes work as calm, readable notes:
+Use a GitHub-style Markdown callout for a note readers should see before continuing. Put the marker on the first line of a blockquote.
 
-> **Good to know:** Keep callouts short. If a note needs several paragraphs, give it a section of its own.
+> [!NOTE]
+> Keep callouts short. If a note needs several paragraphs, give it a section of its own.
 
-For a more prominent message, use a small HTML component in trusted documentation files:
+```markdown
+> [!NOTE]
+> Keep callouts short. If a note needs several paragraphs, give it a section of its own.
+```
 
-<aside class="callout" aria-label="Important note">
-  <strong>Important</strong>
-  <p>Check both themes when adding a new color or surface.</p>
-</aside>
+Use `[!TIP]` for optional advice, `[!IMPORTANT]` for information readers need to succeed, `[!WARNING]` for a risk, and `[!CAUTION]` for serious consequences.
 
 ## Quotations and captions
 
@@ -143,6 +144,11 @@ export const settings = {
   theme: "light", // [!code --]
   theme: "system", // [!code ++]
 };
+```
+
+Here’s the finished example ready to copy. It comes from `src/examples/settings.js`. [See how to include a file](/guides/writing-pages/#include-code-from-a-file).
+
+```js file="settings.js"
 ```
 
 ### Literal template examples

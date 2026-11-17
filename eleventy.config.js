@@ -1,7 +1,9 @@
 import eleventyNavigationPlugin from "@11ty/eleventy-navigation";
 import markdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
+import { markdownCallouts } from "./lib/markdown-callouts.js";
 import { createCodeBlocksPlugin } from "./lib/code-blocks.js";
+import { docHeadingMatches } from "./lib/doc-headings.js";
 import { icon } from "./lib/icons.js";
 import { relativeUrl } from "./lib/relative-urls.js";
 import { githubEditUrl, jsonScript } from "./lib/template-data.js";
@@ -29,6 +31,7 @@ export default async function (eleventyConfig) {
         })(slug, options, state, index);
       },
     })
+    .use(markdownCallouts)
     .use(await createCodeBlocksPlugin());
   eleventyConfig.setLibrary("md", markdown);
 
@@ -50,14 +53,8 @@ export default async function (eleventyConfig) {
 
   eleventyConfig.addFilter("docHeadings", (html) => {
     const groups = [];
-    for (const match of String(html).matchAll(/<h([23])\b([^>]*)>([\s\S]*?)<\/h\1>/g)) {
-      const id = match[2].match(/\bid="([^"]+)"/);
-      if (!id) continue;
-      const title = markdown.utils.unescapeAll(
-        match[3].replace(/<a\b[^>]*class="header-anchor"[^>]*>[\s\S]*?<\/a>/g, "")
-          .replace(/<[^>]+>/g, "").trim(),
-      );
-      const heading = { id: id[1], title, level: Number(match[1]), children: [] };
+    for (const { id, title, level } of docHeadingMatches(String(html))) {
+      const heading = { id, title, level, children: [] };
       if (heading.level === 3 && groups.at(-1)?.level === 2) groups.at(-1).children.push(heading);
       else groups.push(heading);
     }
@@ -71,6 +68,7 @@ export default async function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "node_modules/@fontsource-variable/inter/files/inter-latin-standard-normal.woff2": "assets/fonts/inter-latin-variable.woff2" });
   eleventyConfig.addPassthroughCopy({ "src/assets/fonts": "assets/fonts" });
   eleventyConfig.addWatchTarget("src/assets/");
+  eleventyConfig.addWatchTarget("src/examples/");
 
   return {
     dir: { input: "src/pages", includes: "../_includes", data: "../_data", output: "out" },

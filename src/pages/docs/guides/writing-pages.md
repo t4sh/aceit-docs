@@ -70,6 +70,17 @@ See [Components](/guides/components/#code-blocks) for rendered examples.
 
 Write internal links from the site root, as in that link. The build rewrites them as relative paths, so the finished site works from any folder.
 
+### Include code from a file
+
+Put the source under `src/examples/`. In an empty fence, write the language followed by `file="path"`. The path is relative to `src/examples/`.
+
+````markdown
+```js file="settings.js" line-numbers
+```
+````
+
+Eleventy reads the file when building the site. The usual fence options still work, and the filename is shown by default. Include files you intend to publish in full.
+
 ### Use trusted HTML sparingly
 
 Raw HTML is enabled for small components in trusted, repository-authored docs. For a complex component, create a Nunjucks page or include under `src/_includes/`. Do not use untrusted Markdown as a template source.

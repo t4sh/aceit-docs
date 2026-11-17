@@ -58,4 +58,5 @@ The [Build Awesome One comparison](https://buildawesome.one/starters/) lists the
 
 - [VitePress Markdown extensions](https://vitepress.dev/guide/markdown): named code examples, grouped alternatives, highlights, and line numbers.
 - [Starlight authoring content](https://starlight.astro.build/guides/authoring-content/): heading structure, quotations, images, asides, and native details.
+- [Docsify](https://github.com/docsifyjs/docsify): search results that link to sections, GitHub-style callouts, and code examples pulled from local source files.
 - Apply these patterns through the existing Markdown renderer and small semantic HTML components. The component guide demonstrates quotations with attribution, keyboard keys, and a reusable release timeline; it does not require a client framework.

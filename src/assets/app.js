@@ -342,27 +342,65 @@ async function loadSearch() {
   return searchPages;
 }
 
+function matchScore(words, title, description, text) {
+  title = title.toLocaleLowerCase();
+  description = description.toLocaleLowerCase();
+  text = text.toLocaleLowerCase();
+  let score = 0;
+  for (const word of words) {
+    const weight = (title.includes(word) ? 8 : 0) + (description.includes(word) ? 3 : 0) + (text.includes(word) ? 1 : 0);
+    if (!weight) return 0;
+    score += weight;
+  }
+  return score;
+}
+
+function bestPageResult(page, words) {
+  const sections = page.sections || [];
+  const text = [page.text, ...sections.map((section) => `${section.title} ${section.text}`)].join(" ");
+  let result = { page, score: matchScore(words, page.title, page.description, text) };
+  for (const section of sections) {
+    const score = matchScore(words, section.title, "", section.text);
+    if (score && (score > result.score || (score === result.score && !result.section))) {
+      result = { page, section, score };
+    }
+  }
+  return result;
+}
+
+function searchExcerpt(text, words) {
+  const blocks = text.split("\n");
+  const block = blocks.find((candidate) => {
+    const lowercase = candidate.toLocaleLowerCase();
+    return words.some((word) => lowercase.includes(word));
+  }) ?? blocks[0];
+  const lowercase = block.toLocaleLowerCase();
+  const matches = words.map((word) => lowercase.indexOf(word)).filter((index) => index >= 0);
+  const start = matches.length ? Math.max(0, Math.min(...matches) - 32) : 0;
+  const end = start + 144;
+  return `${start ? "…" : ""}${block.slice(start, end).trim()}${end < block.length ? "…" : ""}`;
+}
+
 function renderResults(pages, query) {
   const words = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-  if (!words.length) { showMessage("Start typing to find a page."); return; }
-  const ranked = pages.map((page) => {
-    const title = page.title.toLocaleLowerCase();
-    const description = page.description.toLocaleLowerCase();
-    const text = page.text.toLocaleLowerCase();
-    const score = words.reduce((sum, word) => sum + (title.includes(word) ? 8 : 0) + (description.includes(word) ? 3 : 0) + (text.includes(word) ? 1 : 0), 0);
-    return { page, score };
-  }).filter((item) => item.score && words.every((word) => `${item.page.title} ${item.page.description} ${item.page.text}`.toLocaleLowerCase().includes(word))).sort((a, b) => b.score - a.score).slice(0, 8);
+  if (!words.length) { showMessage("Start typing to find a page or section."); return; }
+  const ranked = pages.map((page) => bestPageResult(page, words))
+    .filter(({ score }) => score)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8);
 
-  if (!ranked.length) { showMessage("No matching pages. Try a different term."); return; }
+  if (!ranked.length) { showMessage("No matches. Try a different term."); return; }
   searchResults.replaceChildren();
-  for (const { page } of ranked) {
+  for (const { page, section } of ranked) {
     const link = document.createElement("a");
     const title = document.createElement("strong");
     const description = document.createElement("span");
     link.className = "search-result";
-    link.href = pageHref(new URL(page.url.slice(1), siteUrl));
-    title.textContent = page.title;
-    description.textContent = page.description;
+    const url = new URL(page.url.slice(1), siteUrl);
+    if (section) url.hash = encodeURIComponent(section.id);
+    link.href = pageHref(url);
+    title.textContent = section ? `${page.title} › ${section.title}` : page.title;
+    description.textContent = section ? searchExcerpt(section.text, words) : page.description;
     link.append(title, description);
     searchResults.append(link);
   }
@@ -401,6 +439,12 @@ document.addEventListener("keydown", (event) => {
 });
 searchInput.addEventListener("input", () => {
   if (searchPages) renderResults(searchPages, searchInput.value);
+});
+searchResults.addEventListener("click", (event) => {
+  // A section on this page can navigate without unloading the dialog.
+  if (event.target.closest(".search-result") && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+    dialog.close();
+  }
 });
 dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();

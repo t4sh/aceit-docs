@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import MarkdownIt from "markdown-it";
 import { createCodeBlocksPlugin } from "../lib/code-blocks.js";
@@ -16,6 +17,15 @@ test("code blocks preserve raw source and escape it in a copy template", () => {
   assert.ok(html.includes(`<template data-code-source>${MarkdownIt().utils.escapeHtml(source)}</template>`));
   assert.match(html, /--shiki-light:/);
   assert.match(html, /--shiki-dark:/);
+});
+
+test("file-backed fences highlight and copy the local source", () => {
+  const source = readFileSync(new URL("../src/examples/settings.js", import.meta.url), "utf8");
+  const html = render('~~~js file="settings.js" {2}\n~~~');
+  assert.match(html, /class="code-title">settings\.js/);
+  assert.match(html, /class="line highlighted"/);
+  assert.ok(html.includes(`<template data-code-source>${MarkdownIt().utils.escapeHtml(source)}</template>`));
+  assert.throws(() => render('~~~js file="../../package.json"\n~~~'), /relative path in src\/examples/);
 });
 
 test("code groups expose labeled panels and a shared package manager preference", () => {
