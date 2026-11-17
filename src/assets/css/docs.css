@@ -7,14 +7,31 @@ html, body { overscroll-behavior: auto; }
   html, body { overscroll-behavior: none; }
 }
 
-/* Native sizing respects platform scrollbars; colors follow every appearance preset. */
-html { scrollbar-width: thin; scrollbar-color: var(--muted-foreground) var(--background); }
-:where(pre, .sidebar-navigation, .toc-inner, .search-dialog, .search-results, .prose table, .code-tabs) {
+/* Theme native scrollbars while leaving their behavior to the browser. */
+html,
+:where(pre, .sidebar-navigation, .toc-inner, .search-dialog, .search-results, .prose table, .code-tabs, .scroll-thin, [data-scroll-surface]) {
+  --scroll-thumb-default: var(--muted-foreground);
+
   scrollbar-width: thin;
-  scrollbar-color: var(--muted-foreground) transparent;
+  scrollbar-color: var(--scroll-thumb, var(--scroll-thumb-default)) var(--scroll-track, transparent);
 }
+
+html {
+  scrollbar-color: var(--scroll-thumb, var(--scroll-thumb-default)) var(--scroll-track, var(--background));
+}
+
+@media (prefers-contrast: more) {
+  html,
+  :where(pre, .sidebar-navigation, .toc-inner, .search-dialog, .search-results, .prose table, .code-tabs, .scroll-thin, [data-scroll-surface]) {
+    --scroll-thumb-default: var(--foreground);
+
+    scrollbar-width: auto;
+  }
+}
+
 @media (forced-colors: active) {
-  html, :where(pre, .sidebar-navigation, .toc-inner, .search-dialog, .search-results, .prose table, .code-tabs) {
+  html,
+  :where(pre, .sidebar-navigation, .toc-inner, .search-dialog, .search-results, .prose table, .code-tabs, .scroll-thin, [data-scroll-surface]) {
     scrollbar-width: auto;
     scrollbar-color: auto;
   }
