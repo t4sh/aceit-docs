@@ -9,6 +9,7 @@ An Eleventy documentation starter with plain Markdown, offline search, and theme
 ## Run it
 
 Requires Node.js 22 or newer.
+Use `nvm install` and `nvm use` to select the development version in `.nvmrc`.
 
 ```bash
 npm install
