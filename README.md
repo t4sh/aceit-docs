@@ -2,7 +2,7 @@
 
 An Eleventy documentation starter with plain Markdown, offline search, and theme presets. Build a static site you can publish on any host or open directly from disk.
 
-[Live demo](https://aceit-docs.vercel.app/) · [Use this template](https://github.com/t4sh/aceit-docs/generate) · [Component examples](https://aceit-docs.vercel.app/guides/components/)
+[Cloudflare Pages](https://aceit-docs.pages.dev/) · [Vercel](https://aceit-docs.vercel.app/) · [Use this template](https://github.com/t4sh/aceit-docs/generate) · [Component examples](https://aceit-docs.vercel.app/guides/components/)
 
 ![Aceit Docs overview with its sidebar, quick start, and page outline](docs/references/preview.webp)
 
@@ -25,6 +25,10 @@ src/
 ├── _includes/   Nunjucks layouts and macros
 └── assets/      CSS, fonts, and browser scripts
 ```
+
+## Hosted previews
+
+Pushes to `main` update the Cloudflare Pages and Vercel demos linked above. To compare the same change on both free tiers, push a feature branch, open a pull request, and follow each provider’s deployment link from the commit checks. Compare time to a shareable URL and whether a reviewer can open it while signed out.
 
 ## Build and deploy
 

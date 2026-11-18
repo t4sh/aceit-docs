@@ -2,6 +2,12 @@
 
 `AGENTS.md` is canonical. `CLAUDE.md` is its byte-identical mirror. Edit this file, then run `npm run sync:agent-docs`; `npm run check:agent-docs` verifies the pair.
 
+## Hosted previews
+
+Stable demos for `main` · [Cloudflare Pages](https://aceit-docs.pages.dev/) · [Vercel](https://aceit-docs.vercel.app/)
+
+Use the Cloudflare Pages and Vercel checks on the same commit to find branch-specific preview URLs. Both providers are under evaluation on their free tiers. Choose the custom domain after the hosting decision.
+
 ## Agent memory
 
 At session start, read `.agent-memory/index.yaml` when it exists. Use each entry's title, type, and status to select memories relevant to the current task, then read those memory files before acting. Recheck the index when the task changes. An empty `[]` index means there are no entries to load yet; continue normally.
